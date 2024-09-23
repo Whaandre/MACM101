@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+%\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{algpascal}
+\usepackage{amssymb}
+\newtheorem{definition}{Definition} [section]
+\newtheorem{proposition}{Proposition} [subsection]
+\newtheorem{theorem}{Theorem} [section]
+\newtheorem{corollary}{Corollary} [theorem]
+
+\title{MACM 101}
+\author{Dr. C. Kay Wiese}
+\date{Septemper 5, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Counting}
+
+\subsection{The Rules of Sums and Products}
+
+Be careful of initial conditions (duplicates and assumptions)
+\\
+\underline{Rules of Sums}
+
+If task A can be performed in $m$ ways, while task B can be performed in $n$ ways and A and B cannot be done simultaneously, then performing either task can be done in any one of $m+n$ ways
+\\
+\underline{Rules of Products}
+
+A procedure P can be broken down into A and B stage. If A has $m$ outcomes and B has $n$ outcomes, P can be carried out in $m * n$ ways.
+\subsection{Permutations}
+\begin{itemize}
+\item Distinct Objects
+\item Linear arrangement objects, i.e.\ the \emph{order} of objects is important
+\end{itemize}
+\begin{definition}Factorials\end{definition} For integer $n \geq 0$,
+\[
+n!=\begin{cases} 1 & n=0 \\ n*(n-1)!&n\geq1\end{cases}
+\]
+\begin{definition}\end{definition} \noindent If there are $n$ distinct objects and $ 1 \leq r \leq n $, then, by rule of product, the number of permutations of size $r$ for the $n$ objects is
+\[
+P(n, r) = \frac{n!}{(n-r)!}
+\]
+\subsection{Combinations}
+\begin{definition}\end{definition} \noindent If there are $n$ distinct objects and $ 1 \leq r \leq n $, then the number of combinations of size $r$ for the $n$ objects is
+\[
+\binom{n}{k}=C(n, r) = \frac{n!}{(n-r)!r!}
+\]
+\\
+You can use a combinatorial argument in proofs.
+\begin{proposition} For positive integers $n$ and $k$ with $n=2k, \frac{n!}{2!^k}$ is an integer. \end{proposition}
+\emph{Proof.}  Consider the $n$ symbols: $x_1, x_1, x_2, x_2, \cdots, x_k, x_k$.
+The number of arrangements of all these $n = 2k$ symbols is an integer that equals
+\[
+\frac{n!}{\underbrace{2! 2! \cdots 2!}_{\text{k factors of 2!}}} = \frac{n!}{2!^k}
+\]
+\begin{definition}Sigma notation\end{definition}
+\[
+a_m + a_{m+1} + a_{m+2} + \cdots + a_{m+n} = \sum_{i = m}^{m+n} a_i
+\]
+\begin{definition}Weight\end{definition}
+Weight of a string $X = x_1 x_2 \dots x_n$ is defiined as wt($X$) = $\sum_{i=1}^n x_i$
+\begin{theorem}Binomial Theorem\end{theorem}
+\[
+(x+y)^n = \sum_{i=0}^{n} \binom{n}{i} x^i y^{n-i}
+\]
+\begin{corollary}\end{corollary} Set $x=y=1$, then it follows that 
+\[
+\sum_{i=0}^n \binom{n}{i} = 2^n
+\]
+\begin{corollary}\end{corollary} Similary, set $x = -1$ and $y = 1$, then it follows that 
+\[
+\sum_{i=0}^n -1^i \binom{n}{i} = 0
+\]
+\begin{theorem}Multinomial Theorem\end{theorem} With integers $n, t > 0$, the coefficient of $ x_1^{n_1}x_2^{n_2}\cdots x_t^{n_t}$ in the expansion of $(x_1 + x_2 + \cdots + x_t)^n$ is
+\[
+\frac{n!}{n_1!n_2! \cdots n_t!} = \binom{n}{n_1, n_2, \cdots n_t}
+\]
+where each $n_i$ is an integer with $0 \leq n_i \leq n$, for all $1 \leq i \leq t$, and $n_1 + n_2 + \cdots + n_t = n$.\\
+
+\emph{Proof.} Choose $x_1$ from $n_1$ out of $n$ factors, then choose $x_2$ from $n_2$ out of $n - n_1$ factors, and so on. This gives 
+\begin{eqnarray*}
+& \displaystyle \binom{n}{n_1} \binom{n-n_1}{n_2} \binom{n-n_1-n_2}{n_3} \cdots \binom{n-n_1-n_2- \cdots - n_{t-1}}{n_t} \\
+= & \displaystyle \frac{n!}{n_1!(n-n_1)!} \frac{(n-n_1)!}{n_2!(n-n_1-n_2)!} \cdots \frac{(n-n_1-n_2- \cdots - n_{t-1})!}{n_t!(n-n_1-n_2- \cdots - n_{t-1}-n_t)!} \\
+= & \displaystyle \frac{n!}{n_1!n_2! \cdots n_t!}
+\end{eqnarray*}
+\subsection{Combinations with Repetition}
+The number of ways to select $r$ of $n$ distinct objects with repetitions is
+\[
+\binom{n+r-1}{r}
+\]
+It is equivalent to the number of ways to separate $r$ identical stones with $n-1$ identical sticks where there are $n$ slots to represent how many times the $n$th object was chosen with the number of stones. 
+
+Same logic can be used for counting how many ways $r$ objects can be distributed to $n$ containers, or how many ways $n$ nonnegative integers can add up to $r$ (order matters).
+
+You can also count the number of execution of such codes:
+\begin{algorithmic}
+\State $counter := 0;$
+\For{i=1}{n}
+\For{j=1}{i}
+\For{k=1}{j}
+\State $counter := counter + 1;$
+\end{algorithmic}
+It is equivalent to counting how many triples of $(i, j, k)$ satisfy $1 \leq k \leq j \leq i \leq n$, which is choosing 3 numbers from $n$ numbers with repetitions. $counter$ would be $\displaystyle \binom{n+3-1}{3}$.
+\pagebreak
+\section{Fundamentals of Logic}
+\subsection{Basic Connectives and Truth Tables}
+\begin{definition}{\emph{Declarative sentences that are either true or false are called} statements\emph{(or} propositions\emph{), and we use lowercase letters of the alphabet to represent such statements.}}
+\end{definition}
+\emph{Primitive} statements cannot be broken down into anything simpler, and new statements can be obtained from existing ones in two ways.
+\begin{enumerate}
+\item Transform a given statement $p$ to $\neg p$ (Not $p$).\\
+\item Combine two or more statements into a \emph{compound} statement, using one of the \emph{logical connectives}.
+\begin{enumerate}
+\item Conjunction: $p \wedge q$ ($p$ and $q$)
+\item Disjunction: 
+\begin{enumerate}
+\item$p \vee q$ ($p$ or $q$)
+\item $p \veebar q$
+\end{enumerate}
+\item Implication: $p \rightarrow q$ ($p$ implies $q$)
+\item Biconditional: $p \leftrightarrow q$ ($p$ if and only if $q$)
+\end{enumerate}
+\end{enumerate}
+Here is the truth table.\footnote{Sometimes, 0 and 1 are used for F and T instead, similar to bit-logic.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $p \wedge q$ & $p \vee q$ & $p \veebar q$ & $p \rightarrow q$ & $p \leftrightarrow q$ \\
+\hline
+T & T & T & T & F & T & T \\
+\hline
+T & F & F & T & T & F & F \\
+\hline
+F & T & F & T & T & T & F \\
+\hline
+F & F & F & F & F & T & T \\
+\hline
+\end{tabular}
+\end{center}
+\begin{definition}
+\emph{A compound statement is called a} tautology \emph{if it is always true. If it is always false, it is called a }contradiction. 
+\end{definition}
+We use the symbol $T_0$ to denote any tautology and the symbol $F_0$ to denote any contradiction.
+\subsection{Logical Equivalence: The Laws of Logic}
+\begin{definition}\emph{Two statements $s_1, s_2$ are said to be }logically equivalent \emph{when $s_1 \leftrightarrow s_2$, and we write $s_1 \Leftrightarrow s_2$}.
+\end{definition}
+\begin{center}
+\textbf{The Laws of Logic}
+\end{center}
+\begin{tabular}  {c l l}
+1) & $\neg \neg p \Leftrightarrow p$ & Law of Double Negation\\
+2) & $\neg (p \wedge q) \Leftrightarrow \neg p \vee \neg q$ & DeMorgan's Laws\\
+& $\neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q$\\
+3) & $p \wedge q \Leftrightarrow q \wedge p$ & Commutative Laws\\
+& $p \vee q \Leftrightarrow q \vee p$\\
+4) & $(p \wedge q) \wedge r \Leftrightarrow p \wedge (q \wedge r)$ & Associative Laws\\
+& $(p \vee q) \vee r \Leftrightarrow p \vee (q \vee r)$\\
+5) & $p \wedge (q \vee r) \Leftrightarrow (p \wedge q) \vee (p \wedge r)$ & Distributive Laws\\
+& $p \vee (q \wedge r) \Leftrightarrow (p \vee q) \wedge (p \vee r)$\\
+6) & $p \vee p \Leftrightarrow p$ & Idempotent Laws\\
+& $p \wedge p \Leftrightarrow p$\\
+7) & $p \vee F_0 \Leftrightarrow p$ & Identity Laws\\
+& $p \wedge T_0 \Leftrightarrow p$\\
+8) & $p \vee \neg p \Leftrightarrow T_0$ & Inverse Laws\\
+& $p \wedge \neg p \Leftrightarrow F_0$\\
+9) & $p \wedge F_0 \Leftrightarrow F_0$ & Domination Laws\\
+& $p \vee T_0 \Leftrightarrow T_0$\\
+10) & $p \vee (p \wedge q) \Leftrightarrow p$ & Absorption Laws\\
+& $p \wedge (p \vee q) \Leftrightarrow p$
+\end{tabular}
+\\ \\
+Following statements are also equivalent.
+\begin {enumerate}
+\item $p \rightarrow q \Leftrightarrow \neg p \vee q$
+\item $p \leftrightarrow q \Leftrightarrow (p \rightarrow q) \wedge (q \rightarrow p) \Leftrightarrow (\neg p \vee q) \wedge (\neg q \vee p)$
+\item $p \veebar q \Leftrightarrow (p \vee q) \wedge \neg (p \wedge q)$
+\end{enumerate}
+Using the above logival equivalences, we can eliminate those three connectives$(\rightarrow, \leftrightarrow, \veebar)$ from any logical compound statements.
+\end{document}
