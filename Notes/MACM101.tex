@@ -5,6 +5,11 @@
 \usepackage{array}
 \usepackage{algpascal}
 \usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage{adjustbox}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newtheorem{definition}{Definition} [section]
 \newtheorem{proposition}{Proposition} [subsection]
 \newtheorem{theorem}{Theorem} [section]
@@ -148,6 +153,7 @@ We use the symbol $T_0$ to denote any tautology and the symbol $F_0$ to denote a
 \subsection{Logical Equivalence: The Laws of Logic}
 \begin{definition}\emph{Two statements $s_1, s_2$ are said to be }logically equivalent \emph{when $s_1 \leftrightarrow s_2$, and we write $s_1 \Leftrightarrow s_2$}.
 \end{definition}
+\noindent If 2 statements are not logically equivalent, we write $s_1 \nLeftrightarrow s_2 \quad (\neg(s_1 \Leftrightarrow s_2))$.
 \begin{center}
 \textbf{The Laws of Logic}
 \end{center}
@@ -180,4 +186,220 @@ Following statements are also equivalent.
 \item $p \veebar q \Leftrightarrow (p \vee q) \wedge \neg (p \wedge q)$
 \end{enumerate}
 Using the above logival equivalences, we can eliminate those three connectives$(\rightarrow, \leftrightarrow, \veebar)$ from any logical compound statements.
+\pagebreak
+\begin{definition}
+\emph{Let $s$ be a statement containing only $\wedge$ and $\vee$ as logical connectives. The dual of $s$, denoted $s^d$, is derived from $s$ by replacing each $\wedge$ with $\vee$, $\vee$ with $\wedge$, $T_0$ with $F_0$, and $F_0$ with $T_0$.}
+\end{definition}
+\noindent If $p$ is a primitive statement, then $p_d$ is the same as p.
+\[
+p = p^d
+\]
+\begin{theorem}
+The Principle of Duality. \emph{Let $s$ and $t$ be statements containing no logical connectives other than $\wedge$ and $\vee$. If $s \Leftrightarrow t$, then $s^d \Leftrightarrow t^d$}.
+\end{theorem}
+\subsubsection{The Subtitution Rules}
+\begin{enumerate}
+\item Suppose, compound statement $P$ is a tautology. If $p$ is a primitive statement that appears in $P$ and we replace all occurrences of $p$ by an arbitrary statement $q$, then the resulting compound statement $P_1$ is also a tautology.
+\item $P$ is a compound statement, $p$ is an arbitrary statement that appears in $P$, let $q$ be a statement such that $p \Leftrightarrow q$. Now replace 1 or more occurrences of $p$ by $q$, this yields $P_1$. Now, $P_1 \Leftrightarrow P$.
+\end{enumerate}
+
+\subsubsection{Relatives of the Implication $p \rightarrow q$}
+\begin{tabular}{l c}
+Inverse: & $\neg p \rightarrow \neg q$\\
+Converse: & $q \rightarrow p$\\
+Contrapositive: & $\neg q \rightarrow \neg p$\\
+\end{tabular}
+\begin{center}
+\begin{tabular}{c l l}
+1) & $p \rightarrow q \Leftrightarrow \neg q \rightarrow \neg p$ & Implication $\Leftrightarrow$ Contrapositive\\
+2) & $q \rightarrow p \Leftrightarrow \neg p \rightarrow \neg q$ & Converse $\Leftrightarrow$ Inverse\\
+3) & $p \rightarrow q \nLeftrightarrow q \rightarrow p$ & Implication $\nLeftrightarrow$ Converse\\
+4) & $\neg p \rightarrow \neg q \nLeftrightarrow \neg q \rightarrow \neg p$ & Contrapositive $\nLeftrightarrow$ Inverse
+\end{tabular}
+\end{center}
+
+\noindent An implication is logically equivalent to its contrapositive, but not to its inverse or converse. At the same time, its inverse and converse are logically equivalent. \\\\
+(\emph{Note:} The negation of an it-then statement (in words) does not begin with the word if. i.e. it is not another implication.)
+\subsubsection{Applications: Simplifying Switching Networks}
+A switching network is made up of wires and switches connecting two Terminals $T_1$ and $T_2$. In such a network, each switch is either open (0) so current doesn't flow, or closed (1) so current does flow through it. Switches in \emph{parallel} are represented by $\vee$, and switches in \emph{series} are represented by $\wedge$.
+\begin{center}
+\begin{circuitikz} \draw
+(0,1) node[left] {$T_1$}
+
+(0,1) to (1,1)
+(1,2) to[normal closed switch, l=$p$] (3,2)
+(1,2) to (1,1)
+(3,2) to (3,1)
+(1,1) to[normal closed switch, l=$q$] (3,1)
+(1,0) to (1,1)
+(3,0) to (3,1)
+(1,0) to[normal closed switch, l=$r$] (3,0)
+(3,1) to (4,1)
+
+(3,1) to (3,1)
+(4,2) to[normal closed switch, l=$p$] (6,2)
+(4,2) to (4,1)
+(6,2) to (6,1)
+(4,1) to[normal closed switch, l=$t$] (6,1)
+(4,0) to (4,1)
+(6,0) to (6,1)
+(4,0) to[normal closed switch, l=$\neg q$] (6,0)
+(6,1) to (7,1)
+
+(6,1) to (6,1)
+(7,2) to[normal closed switch, l=$p$] (9,2)
+(7,2) to (7,1)
+(9,2) to (9,1)
+(7,1) to[normal closed switch, l=$\neg t$] (9,1)
+(7,0) to (7,1)
+(9,0) to (9,1)
+(7,0) to[normal closed switch, l=$r$] (9,0)
+(9,1) to (10,1)
+
+(10,1) node[right] {$T_2$}
+;
+\end{circuitikz}
+\end{center}
+Such network can be represented by the statement $(p \vee q \vee r) \wedge (p \vee t \vee \neg q) \wedge (p \vee \neg t \vee r)$. This can be simplified using the laws of logic.
+\begin{center}
+\begin{tabular} {l l l}
+& $(p \vee q \vee r) \wedge (p \vee t \vee \neg q) \wedge (p \vee \neg t \vee r)$ & \textbf{Reasons}\\
+$\Leftrightarrow$ & $(p \vee q \vee r) \wedge (p \vee t \vee \neg q) \wedge (p \vee \neg t \vee r)$ & d\\
+\end{tabular}
+\end{center}
+\subsection{Logical Implication: Rules of Inference}
+We show an argument with premises $(p_1, p_2, \cdots, p_n)$ and conclusion $q$ is valid by showing the following implication is a tautology:
+\[
+(p_1 \wedge p_2 \wedge \cdots \wedge p_n) \rightarrow q
+\]
+To show the following implication is a tautology, we need to show that $q$ is true if all the premises are true.
+
+You can incorporate this into an automatic "inference engine", the basic component of an AI expert system. These systems combine basic facts to develop more facts.
+\begin{definition}
+\emph{If $p, q$ are arbitrary statements such that $p \rightarrow q$ is a tautology, then we say that $p$} logically implies \emph{$q$ and we write $p \Rightarrow q$ to denote this situation.}
+\end{definition}
+The notation $p \nRightarrow q$ is used to indicate that $p \rightarrow q$ is \emph{not} a tautology --- so the given implication ($p \rightarrow q$) is not a logical implication.
+If $p \Leftrightarrow q$, then $p \leftrightarrow q$ is a tautology. This means $p \rightarrow q$ and $q \rightarrow p$ are tautologies, too, thus $p \Rightarrow q$ and $q \Rightarrow p$. The converse is also true.
+
+When establishing the validity of an argument, the rules of inferences will enable us to consider only the cases wherein all the premises are true. They are fundamental in the development of a step-by-step validation of how the conclusion $q$ logically follows from the premises $p_1, p_2, \cdots , p_n$ in an implication of the form \[(p_1 \wedge p_2 \wedge \cdots \wedge p_n) \rightarrow q.\] This development will establish the validity of the given arguement, for it will show how the truth of the conclusion can be deduced from the truth of the premises.
+\begin{center}
+\addtolength{\leftskip} {-2cm} % increase (absolute) value if needed
+\addtolength{\rightskip}{-2cm}
+%\textbf{\large Rules of Inference}
+\begin{tabular} {|l |l| l| C{4cm}|}
+\hline
+& \textbf{Rule of Inference} & \textbf{Related Logical Implication} & \textbf{Name of Rule}\\
+\hline
+1) & \begin{tabular} {c l}& $p$\\& $p \rightarrow q$\\\hline$\therefore$ & $q$\end{tabular} & $[p \wedge (p \rightarrow q)] \rightarrow q$ & Rule of Detachment\\
+\hline
+2) & \begin{tabular} {c l}& $p \rightarrow q$\\& $q\rightarrow r$\\\hline$\therefore$ & $p \rightarrow r$\end{tabular} & $[(p \rightarrow q) \vee (q \rightarrow r)] \rightarrow (p \rightarrow r)$ & Law of the Syllogism\\
+\hline
+3) & \begin{tabular} {c l}& $p \rightarrow q$\\& $\neg q$\\\hline$\therefore$ & $\neg p$\end{tabular} & $[(p \rightarrow q) \wedge \neg q)] \rightarrow \neg p$ &Modus Tollens \\
+\hline
+4) & \begin{tabular} {c l}& $p$\\& $q$\\\hline$\therefore$ & $p \wedge q$\end{tabular} & & Rule of Conjunction\\
+\hline
+5) & \begin{tabular} {c l}
+& $p \vee q$\\
+& $\neg p$\\
+\hline
+$\therefore$ & $q$
+\end{tabular} & $[(p \vee q) \wedge \neg p] \Rightarrow q$ & Rule of Disjunctive Syllogism\\
+\hline
+6) & \begin{tabular} {c l}
+& $\neg p \rightarrow F_0$\\
+\hline
+$\therefore$ & $p$
+\end{tabular}
+ & $(\neg p \rightarrow F_0) \rightarrow p$ & Rule of Contradiction\\
+\hline
+7) & \begin{tabular} {c l}
+& $p \wedge q$\\
+\hline
+$\therefore$ & $p$
+\end{tabular}
+ & $(p \wedge q) \rightarrow p$ & Rule of Conjunctive Simplification\\
+\hline
+8) & \begin{tabular} {c l}
+& $p$\\
+\hline
+$\therefore$ & $p \vee q$
+\end{tabular}
+ & $p \rightarrow p \vee q$ & Rule of Disjunctive Amplification\\
+\hline
+9) & \begin{tabular} {c l}
+& $p \wedge q$\\
+& $p \rightarrow (q \rightarrow r)$\\
+\hline
+$\therefore$ & $r$
+\end{tabular}
+ & $[(p \wedge q) \wedge [p \rightarrow (q \rightarrow r)]] \rightarrow r$ & Rule of Conditional Proof\\
+\hline
+10) & \begin{tabular} {c l}
+& $p \rightarrow r$\\
+& $q \rightarrow r$\\
+\hline
+$\therefore$ & $(p \vee q) \rightarrow r$
+\end{tabular}
+ & $[(p \rightarrow r) \wedge (q \rightarrow r)] \rightarrow [(p \vee q) \rightarrow r]$ & Rule for Proof Cases\\
+\hline
+11) & \begin{tabular} {c l}
+& $p \rightarrow q$\\
+& $r \rightarrow s$\\
+& $p \vee r$\\
+\hline
+$\therefore$ & $q \vee s$
+\end{tabular}
+ & $[(p \rightarrow q) \wedge (r \rightarrow s) \wedge (p \vee r)] \rightarrow (q \vee s)$ & Rule of the Constructive Dilemma\\
+\hline
+12) & \begin{tabular} {c l}
+& $\neg p \rightarrow p$\\
+& $\neg r \rightarrow s$\\
+& $\neg q \vee \neg s$\\
+\hline
+$\therefore$ & $\neg p \vee \neg r$
+\end{tabular}
+ & $[(p \rightarrow q) \wedge (r \rightarrow s) \wedge (\neg q \vee \neg s)] \rightarrow (\neg p \vee \neg r)$ & Rule of Contradiction\\
+\hline
+\end{tabular}
+\end{center}
+\pagebreak
+The Rule of Contradiction is the basis of a method of \emph{Proof by Contradiction}, or \emph{Reductio ad Absurdum}.\
+In a Proof of Contradiction, we establish the validity of the argument
+\[
+(p_1 \wedge p_2 \wedge \cdots \wedge p_n) \rightarrow q
+\]
+by establishing the validity of the logically equivalent argument
+\[
+(p_1 \wedge p_2 \wedge \cdots \wedge p_n \wedge q) \rightarrow F_0.
+\] 
+We first assume that what we are trying to prove is actually false, then produce a contradiction of the form $s \wedge \neg s$, for some statement $s$. This contradiction concludes that the statement that was assumed to be false is in fact true, and this validates the argument (or completes the proof).
+\subsection{Predicate Logic and Quantifiers}
+\begin{definition} \emph{A declarative sentence is an }open statement \emph{if}\end{definition}
+\begin{enumerate}
+\item It contains one or more variables, and
+\item It is not a statement, but
+\item It becomes a statement when the variables in it are replaced by certain allowable choices.
+\end{enumerate}
+All of these are open statements: \begin{center}The number $x-5$ is an even integer.\\ $x-5=7$\\$3x+y>7$\end{center}
+The allowable choices of variable constitute what is called the \emph{universe}\footnote{This is an example of a \emph{set}} or \emph{universe of discourse} for the open statement. Open statements are denoted by $p(x), q(x, y)$, etc. (also called predicates).
+
+We can \emph{quantify} an open statement with two types of quantifiers:
+\begin{enumerate}
+\item existential quantifier: $\exists$\\
+\begin{tabular} {ll}
+$\exists x$: & For some $x$\\
+& For at least one $x$\\
+& There exists an $x$ such that \dots
+\end{tabular}
+\item universal quantifier: $\forall$\\
+\begin{tabular} {ll}
+$\forall x$: & For all $x$\\
+& For any $x$\\
+& For every $x$
+\end{tabular}
+\end{enumerate}
+Variable $x$ is called a \emph{free} variable in an open statement and a \emph{bound} variable in a quantified open statement.
+
+Let $p(x)$ denote any open statement with a prescribed \emph{nonempty} universe. Then,
+\[ \forall x \; p(x) \Rightarrow \exists x \; p(x). \]
 \end{document}
