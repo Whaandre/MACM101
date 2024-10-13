@@ -17,7 +17,7 @@
 
 \title{MACM 101}
 \author{Dr. C. Kay Wiese}
-\date{Septemper 5, 2024}
+\date{}
 
 \begin{document}
 
@@ -264,7 +264,18 @@ Such network can be represented by the statement $(p \vee q \vee r) \wedge (p \v
 \begin{center}
 \begin{tabular} {l l l}
 & $(p \vee q \vee r) \wedge (p \vee t \vee \neg q) \wedge (p \vee \neg t \vee r)$ & \textbf{Reasons}\\
-$\Leftrightarrow$ & $(p \vee q \vee r) \wedge (p \vee t \vee \neg q) \wedge (p \vee \neg t \vee r)$ & d\\
+$\Leftrightarrow$ & $p \vee [(q \vee r) \wedge (t \vee \neg q) \wedge (\neg t \vee r)]$ & Distributive Law of $\wedge$ over $\vee$\\
+$\Leftrightarrow$ & $p \vee [(q \vee r) \wedge (\neg t \vee r) \wedge (t \vee \neg q)]$ & Commutative Law of $\wedge$\\
+$\Leftrightarrow$ & $p \vee [((q \wedge \neg t) \vee r) \wedge (t \vee \neg q)]$ & Distributive Law of $\wedge$ over $\vee$\\
+$\Leftrightarrow$ & $p \vee [((q \wedge \neg t) \vee r) \wedge (\neg \neg t \vee \neg q)]$ & Law of Double Negation\\
+$\Leftrightarrow$ & $p \vee [((q \wedge \neg t) \vee r) \wedge \neg (\neg t \wedge q)]$ & DeMorgan's Law\\
+$\Leftrightarrow$ & $p \vee [\neg (\neg t \wedge q) \wedge ((\neg t \wedge q) \vee r)]$ & Commutative Law of $\wedge$\\
+$\Leftrightarrow$ & $p \vee [(\neg (\neg t \wedge q) \wedge (\neg t \wedge q)) \vee (\neg (\neg t \wedge q) \wedge r)]$ & Distributive Law of $\wedge$ over $\vee$\\
+$\Leftrightarrow$ & $p \vee [F_0 \vee (\neg (\neg t \wedge q) \wedge r)]$ & $s \wedge \neg s \Leftrightarrow F_0$ for any statement $s$\\
+$\Leftrightarrow$ & $p \vee [\neg (\neg t \wedge q) \wedge r]$ & $F_0$ is the Identity for $\vee$\\
+$\Leftrightarrow$ & $p \vee [r \wedge \neg (\neg t \wedge q)]$ & Commutative Law of $\wedge$\\
+$\Leftrightarrow$ & $p \vee [r \wedge (t \vee \neg q)]$ & DeMorgan's Law and \\
+&&the Law of Double Negation
 \end{tabular}
 \end{center}
 \subsection{Logical Implication: Rules of Inference}
@@ -402,4 +413,73 @@ Variable $x$ is called a \emph{free} variable in an open statement and a \emph{b
 
 Let $p(x)$ denote any open statement with a prescribed \emph{nonempty} universe. Then,
 \[ \forall x \; p(x) \Rightarrow \exists x \; p(x). \]
+\begin{definition} \emph{Let $p(x), q(x)$ be open statements defined for a given universe. \\\indent When the biconditional $p(a) \leftrightarrow q(a)$ is true for each replacement $a$ from the universe (that is, $p(a) \Leftrightarrow q(a)$ for each $a$ in universe), we write $\forall x \; [p(x) \Leftrightarrow q(x)]$.\\\indent If the implication $p \rightarrow q$ is true for each $a$ in the universe (that is, $p(a) \Rightarrow q(a)$ for each $a$ in universe), then we write $\forall x \; [p(x) \Rightarrow q(x)]$.}
+\end{definition}
+\begin{definition}\emph{For open statements $p(x), q(x)$ --- defined for a prescribed universe --- and the universally quantified statement $\forall x \; [p(x) \rightarrow q(x)]$, we define:}\end{definition}
+\begin{tabular} {lclcl}
+1) & Contrapositive of &$\forall x \; [p(x) \rightarrow q(x)]$& to be & $\forall x \; [\neg q(x) \rightarrow \neg p(x)]$\\
+2) & Converse of &$\forall x \; [p(x) \rightarrow q(x)]$& to be & $\forall x \; [q(x) \rightarrow p(x)]$\\
+3) & Inverse of &$\forall x \; [p(x) \rightarrow q(x)]$& to be & $\forall x \; [\neg p(x) \rightarrow \neg q(x)]$\\
+\end{tabular}\\
+
+For a prescribed universe and any open statements $p(x), q(x)$ in the variable $x$: 
+\[\exists x \; [p(x) \wedge q(x)] \Rightarrow [\exists x \; p(x) \wedge \exists x \; q(x)]\]
+\[\exists x \; [p(x) \vee q(x)] \Leftrightarrow [\exists x \; p(x) \vee \exists x \; q(x)]\]
+\[\forall x \; [p(x) \wedge q(x)] \Leftrightarrow [\forall x \; p(x) \wedge \forall x \; q(x)]\]
+\[\left[\forall x \; p(x) \vee \forall x \; q(x)\right] \Rightarrow \forall x \; [p(x) \vee q(x)]\]
+Negation of quantifications:
+\[\neg[\forall x \; p(x)] \Leftrightarrow \exists x \; \neg p(x)\]
+\[\neg[\exists x \; p(x)] \Leftrightarrow \forall x \; \neg p(x)\]
+\section{Sets}
+\subsection{Introduction to Sets}
+\begin{definition}\emph{A set is a collection of objects. The objects in a set are also called its }members, \emph{or }elements. \emph{A set is said to contain its elements.}
+\end{definition}
+\begin{itemize}
+\item Elements of sets can be related, or completely unrelated.
+\item Uppercase letters A, B, C, \dots, S, T, \dots are used to denote sets.
+\item Order of elements does not matter.
+\item $x \in A$ indicates that $x$ is an element of $A$.
+\item $x \notin A$ indicates that $x$ is not an element of $A$.
+\end{itemize}
+\subsubsection{Infinite Sets}
+\begin{itemize}
+\item $\mathbb{N} = $ Set of natural numbers%\{1,2,3,\dots\}$
+\item $\mathbb{Z} = $ Set of integers
+\item $\mathbb{Q} = $ Set of rational numbers
+\item $\mathbb{R} = $ Set of real numbers
+\end{itemize}
+\subsubsection{Set Builder Notation}
+\[A = \{x|condition\}\]
+The vertical line $|$ is read \emph{such that}, and the symbols $\{x| \dots \}$ are read \emph{the set of all $x$ such that ...\,}.
+\begin{definition} \emph{Two sets are equal if and only if they have exactly the same elements.\footnote{$A = \{1,2,3\}$ and $B = \{1,1,2,3,2,3,3\}$ are considered to be the same set.}} \end{definition}
+\subsubsection{Cardinality}
+\begin{definition} \emph{Let $S$ be a set. If there are exactly $n$ distinct elements in $S$, we say $S$ is a finite set and that $n$ is the cardinality of $n$ denoted by $|S|$.} \end{definition}
+\begin{definition} \emph{A set is infinite if it is not finite.} \end{definition}
+\subsubsection{Cartesian Product}
+\begin{definition} \emph{Let $A$ and $B$ be sets. The cartesian product of $A$ and $B$, denoted by $A\times B$ is the set of all ordered pairs $(a, b)$ where $a \in A$ and $b \in B$.}
+\[A \times B = \{ (a, b) | a \in A \wedge b \in B \}\]
+\end{definition}
+\subsection{Subsets}
+\begin{definition}
+\emph{Set $A$ is said to be a subset of $B$ if and only if every element of $A$ is also an element of $B$. We use $A \subseteq B$ to indicate that $A$ is a subset of $B$. In predicate logic,} 
+\[A \subseteq B \leftrightarrow \forall x \; [x \in A \rightarrow x \in B].\]
+\end{definition}
+\begin{itemize}
+\item $A \subset B$ means $A$ is a proper subset of $B$ when $(A \subseteq B) \wedge (A \neq B)$
+\item To show that $A=B$, we show that $(A \subseteq B) \wedge (B \subseteq A)$.
+\end{itemize}
+\begin{definition}\emph{The }null set, \emph{or }empty set, \emph{is the set containing no elements. It is denoted by $\emptyset$ or \{ \}.}\end{definition}
+\subsubsection{The Power Set}
+\begin{definition} \emph{Given a set $S$, the }power set \emph{of $S$ is the set of all subsets of $S$. We denote this by $P(S)$\footnote{In some computer science books $2^A$ is used for $P(A)$.}.}\end{definition}
+For any finite set $A$ with $|A| = n \geq 0$, $A$ has $2^n$ subsets and $|P(A)| = 2^n$.
+\subsection{Set Operations}
+\begin{definition} \emph{For $A, B \subseteq U$, we define the following:}
+\begin{itemize}
+\item $A \cup B = \{x|x \in A \vee x \in B\}$
+\item $A \cap B = \{x|x \in A \wedge x \in B\}$
+\item $A \bigtriangleup B = \{x|x \in A \cup B \wedge x \notin A \cap B\}$
+\end{itemize}
+\end{definition}
+\begin{definition}\emph{Let $S, T \subseteq U$. The sets $S$ and $T$ are called }disjoint, \emph{or }mutually disjoint, \emph{when $S \cap T = \emptyset$.}\end{definition}
+\begin{definition}\emph{For a set $A \subseteq U$, the }complement \emph{of $A$, denoted $U-A$, or $\overline{A}$, is given by $\{x|x\in U \wedge x \notin A\}$}\end{definition}
 \end{document}
