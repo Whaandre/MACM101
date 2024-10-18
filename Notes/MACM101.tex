@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{circuitikz}
 \usepackage{adjustbox}
+\usepackage[shortlabels]{enumitem}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -482,4 +483,52 @@ For any finite set $A$ with $|A| = n \geq 0$, $A$ has $2^n$ subsets and $|P(A)| 
 \end{definition}
 \begin{definition}\emph{Let $S, T \subseteq U$. The sets $S$ and $T$ are called }disjoint, \emph{or }mutually disjoint, \emph{when $S \cap T = \emptyset$.}\end{definition}
 \begin{definition}\emph{For a set $A \subseteq U$, the }complement \emph{of $A$, denoted $U-A$, or $\overline{A}$, is given by $\{x|x\in U \wedge x \notin A\}$}\end{definition}
+\begin{center}
+\textbf{The Laws of Set Theory}
+\end{center}
+\begin{tabular}  {c l l}
+1) & $\overline{\overline{A}} = A$ & Law of Double Complement\\
+2) & $\overline{A \cup B} = \overline{A} \cap \overline{B}$ & DeMorgan's Laws\\
+& $\overline{A \cap B} = \overline{A} \cup \overline{B}$\\
+3) & $A \cup B = B \cup A$ & Commutative Laws\\
+& $A \cap B = B \cap A$\\
+4) & $A \cup (B \cup C) = (A \cup B) \cup C$ & Associative Laws\\
+& $A \cap (B \cap C) = (A \cap B) \cap C$\\
+5) & $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ & Distributive Laws\\
+& $A \cap (B \cup C) = (A \cap B) \cup (A \cap C))$\\
+6) & $A \cup A = A$ & Idempotent Laws\\
+& $A \cap A = A$\\
+7) & $A \cup \emptyset = A$ & Identity Laws\\
+& $A \cap U = A$\\
+8) & $A \cup \overline{A} = U$ & Inverse Laws\\
+& $A \cap \overline{A} = \emptyset$\\
+9) & $A \cup U = U$ & Domination Laws\\
+& $A \cap \emptyset = \emptyset$\\
+10) & $A \cup (A \cap B) = A$ & Absorption Laws\\
+& $A \cap (A \cup B) = A$
+\end{tabular}
+\begin{definition}
+\emph{Let $s$ be a statement dealing with the equality of two set expressions. The }dual \emph{of $s$, denoted $s^d$, is obtained from replacing (1) each occurrence of $\emptyset$ and $U$ by $U$ and $\emptyset$, respectively; and (2) each occurrence of $\cap$ and $\cup$ by $\cup$ and $\cap$, respectively.}
+\end{definition}
+\begin{theorem}
+The Principle of Duality. \emph{Let $s$ be a theorem dealing with the equality of two set expressions. Then $s^d$, the dual of $s$, is also a theorem.}
+\end{theorem}
+\section{Properties of the Integers: Mathematical Induction}
+\subsection{The Well-Ordering Principle}
+\begin{definition}The Well-Ordering Principle. \emph{Every }nonempty \emph{subset of $\mathbb{Z}^+$ contains a smallest element. ($\mathbb{Z}^+$ is} well ordered.)
+\[\forall X \subseteq \mathbb{Z}^+ \wedge x \neq \emptyset \; \exists a \in X \; |\; \forall x \in X, a \subseteq x\]
+is this right..?
+\end{definition}
+We can express the set $\mathbb{Z}^+$ using the inequality symbol $\geq$:
+\[\mathbb{Z}^+ = \{x \in \mathbb{Z} | x > 0\} = \{x \in \mathbb{Z} | x \geq 1\}.\]
+You cannot with $\mathbb{Q}^+$ and $\mathbb{R}^+$ because they are not well ordered. If $q$ is a positive rational number, then since $0 < q/2 < q$, we would have a smaller positive rational number $q/2$.
+\begin{theorem}The Principle of Mathematical Induction. \begin{em}Let $S(n)$ denote an open mathematical statement that involves one or more occurrences of the variable $n$, which represents a positive integer.
+\begin{enumerate} [(a)]
+\item If $S(1)$ is true; and
+\item If whenever $S(k)$ is true (for some particular, but arbitrarily chosen, $k \in \mathbb{Z}^+$), then $S(k+1)$ is true;
+\end{enumerate}
+then $S(n)$ is true for all $n \in \mathbb{Z}^+$.\\
+\emph{Proof.} Let $S(n)$ be such an open statement satisfying conditions (a) and (b), and let $F = \{t \in \mathbb{Z}^+ | S(t) \text{ is false}\}$. We wish to prove that $F=\emptyset$, so to obtain a contradiction we assume that $F\neq\emptyset$. Then by the Well-Ordering Principle, $F$ has a least element $m$. Since $S(1)$ is true, it follows that $m \neq 1$, so $m > 1$, and consequently $m - 1 \notin F$, we have $S(m-1)$ true. So by condition (b) it follows that $S((m-1)+1) = S(m)$ is true, contradicting $m \in F$. This contradiction arose from the assumption that $F \neq \emptyset$. Consequently, $F = \emptyset$.
+\end{em}
+\end{theorem}
 \end{document}
