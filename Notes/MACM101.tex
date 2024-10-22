@@ -302,7 +302,7 @@ When establishing the validity of an argument, the rules of inferences will enab
 \hline
 & \textbf{Rule of Inference} & \textbf{Related Logical Implication} & \textbf{Name of Rule}\\
 \hline
-1) & \begin{tabular} {c l}& $p$\\& $p \rightarrow q$\\\hline$\therefore$ & $q$\end{tabular} & $[p \wedge (p \rightarrow q)] \rightarrow q$ & Rule of Detachment\\
+1) & \begin{tabular} {c l}& $p$\\& $p \rightarrow q$\\\hline$\therefore$ & $q$\end{tabular} & $[p \wedge (p \rightarrow q)] \rightarrow q$ & Rule of Detachment / Modus Ponens\\
 \hline
 2) & \begin{tabular} {c l}& $p \rightarrow q$\\& $q\rightarrow r$\\\hline$\therefore$ & $p \rightarrow r$\end{tabular} & $[(p \rightarrow q) \vee (q \rightarrow r)] \rightarrow (p \rightarrow r)$ & Law of the Syllogism\\
 \hline
@@ -364,13 +364,13 @@ $\therefore$ & $q \vee s$
  & $[(p \rightarrow q) \wedge (r \rightarrow s) \wedge (p \vee r)] \rightarrow (q \vee s)$ & Rule of the Constructive Dilemma\\
 \hline
 12) & \begin{tabular} {c l}
-& $\neg p \rightarrow p$\\
-& $\neg r \rightarrow s$\\
+& $p \rightarrow q$\\
+& $r \rightarrow s$\\
 & $\neg q \vee \neg s$\\
 \hline
 $\therefore$ & $\neg p \vee \neg r$
 \end{tabular}
- & $[(p \rightarrow q) \wedge (r \rightarrow s) \wedge (\neg q \vee \neg s)] \rightarrow (\neg p \vee \neg r)$ & Rule of Contradiction\\
+ & $[(p \rightarrow q) \wedge (r \rightarrow s) \wedge (\neg q \vee \neg s)] \rightarrow (\neg p \vee \neg r)$ & Rule of Destructive Dilemma\\
 \hline
 \end{tabular}
 \end{center}
