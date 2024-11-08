@@ -15,6 +15,7 @@
 \newtheorem{proposition}{Proposition} [subsection]
 \newtheorem{theorem}{Theorem} [section]
 \newtheorem{corollary}{Corollary} [theorem]
+\newtheorem{lemma}{Lemma} [section]
 
 \title{MACM 101}
 \author{Dr. C. Kay Wiese}
@@ -516,8 +517,7 @@ The Principle of Duality. \emph{Let $s$ be a theorem dealing with the equality o
 \section{Properties of the Integers: Mathematical Induction}
 \subsection{The Well-Ordering Principle}
 \begin{definition}The Well-Ordering Principle. \emph{Every }nonempty \emph{subset of $\mathbb{Z}^+$ contains a smallest element. ($\mathbb{Z}^+$ is} well ordered.)
-\[\forall X \subseteq \mathbb{Z}^+ \wedge x \neq \emptyset \; \exists a \in X \; |\; \forall x \in X, a \subseteq x\]
-is this right..?
+\[\forall X \subseteq \mathbb{Z}^+ \wedge X \neq \emptyset \; \exists \; a \in X \; |\; \forall x \in X: a \leq x\]
 \end{definition}
 We can express the set $\mathbb{Z}^+$ using the inequality symbol $\geq$:
 \[\mathbb{Z}^+ = \{x \in \mathbb{Z} | x > 0\} = \{x \in \mathbb{Z} | x \geq 1\}.\]
@@ -529,6 +529,132 @@ You cannot with $\mathbb{Q}^+$ and $\mathbb{R}^+$ because they are not well orde
 \end{enumerate}
 then $S(n)$ is true for all $n \in \mathbb{Z}^+$.\\
 \emph{Proof.} Let $S(n)$ be such an open statement satisfying conditions (a) and (b), and let $F = \{t \in \mathbb{Z}^+ | S(t) \text{ is false}\}$. We wish to prove that $F=\emptyset$, so to obtain a contradiction we assume that $F\neq\emptyset$. Then by the Well-Ordering Principle, $F$ has a least element $m$. Since $S(1)$ is true, it follows that $m \neq 1$, so $m > 1$, and consequently $m - 1 \notin F$, we have $S(m-1)$ true. So by condition (b) it follows that $S((m-1)+1) = S(m)$ is true, contradicting $m \in F$. This contradiction arose from the assumption that $F \neq \emptyset$. Consequently, $F = \emptyset$.
+\end{em}
+\end{theorem}
+\begin{theorem}The Principle of Mathematical Induction --- Alternate Form. \begin{em}Let $S(n)$ denote an open mathematical statement that involves one or more occurrences of the variable $n$, which represents a positive integer. Also let. $n_0, n_1 \in \mathbb{Z}^+$ with $n_0 \leq n_1$. 
+\begin{enumerate} [(a)]
+\item If $S(n_0), S(n_0 + 1), \dots , S(n_1 - 1),$ and  $S(n_1)$ are true; and
+\item If whenever $S(n_0), S(n_0 + 1), \dots , S(k - 1),$ and  $S(k)$ are true for some (particular, but arbitrarily chosen), $k \in \mathbb{Z}^+$), where $k \geq n_1$, then the statement $S(k+1)$ is also true;
+\end{enumerate}
+then $S(n)$ is true for all $n \geq n_0$.
+\end{em}
+\end{theorem}
+\subsection{The Division Algorithm: Prime Numbers}
+\begin{definition}
+\begin{em}
+If $a, b \in \mathbb{Z}$ and $b \neq 0$, we say that $b$ divides $a$, and we write $b|a$, if there is an integer $n$ such that $a = bn$. When this occurs we say that $b$ is a \emph{divisor} of $a$, or $a$ is a \emph{multiple} of $b$.
+\begin{itemize}
+\item When $ab = 0$ for $a,b \in \mathbb{Z}$, then $a=0$ or $b=0$. We say that $\mathbb{Z}$ has no proper divisors of 0.
+\item This allows us to \emph{cancel} as in $2x=2y \Rightarrow x=y$, for $x, y \in \mathbb{Z}$, because $2x=2y \Rightarrow 2(x-y)=0 \Rightarrow 2=0$ or $x=y \Rightarrow x=y$ (Note that we did not multiply both sides by $\frac{1}{2}$ which is outside the system $\mathbb{Z}$).
+\item Whenever we divide by an integer $a$, we assume $a \neq 0$.
+\end{itemize}
+\end{em}
+\end{definition}
+\begin{theorem}
+\begin{em}
+For all $a,b,c \in \mathbb{Z}$
+\begin{enumerate} [a)]
+\item $1|a$ and $a|0$.
+\item $[(a|b) \wedge (b|a)] \Rightarrow a=\pm b$.
+\item $[(a|b) \wedge (b|c)] \Rightarrow a|c$.
+\item $a|b \Rightarrow a|bx$ for all $x \in \mathbb{Z}$.
+\item If $x = y + z$, for some $x, y, z \in \mathbb{Z}$, and $a$ divides two of the three integers $x, y,$ and $z$, then $a$ divides the remaining integer.
+\item $[(a|b) \wedge (a|c)] \Rightarrow a|(bx+cy)\footnote{This is called a \emph{linear combination of} $b, c$.}$ for all $x, y \in \mathbb{Z}$.
+\item For $1 \leq i \leq n$, let $c_i \in \mathbb{Z}$. If $a$ divides each $c_i$, then $a|(c_1x_1 + c_2x_2 + \cdots + c_nx_n)$, where $x_i \in \mathbb{Z}$ for all $1 \leq i \leq n$.
+\end{enumerate}
+\end{em}
+\end{theorem}
+Using this binary operation of integer division we find ourselves in the area of mathematics called \emph{number theory}, which examines the properties of integers and other sets of numbers.
+
+All $n \in \mathbb{Z}^+$ where $n > 1$ have at least 2 divisors, namely, 1 and $n$. Some integers, such as 2, 3, 5, 7, and 11 have exactly two divisors. These integers are called \emph{primes}. All other integers (greater than 1 and not prime) are called \emph{composite}.
+\begin{lemma}
+\begin{em}
+If $n \in \mathbb{Z}^+$ and $n$ is composite, then there is a prime $p$ such that $p|n$.
+\\
+\emph{Proof.} If not, let $S$ be the set of all composite integers that have no prime divisor. If $S \neq \emptyset$, then by the Well-Ordering Principle, $S$ has a least element $m$. But if $m$ is composite, then $m = m_1m_2$, where $m_1, m_2 \in \mathbb{Z}^+$ with $1 < m_1 < m$ and $1 < m_2 < m$. Since $m = m_1m_2$, if now follows that $p|m$, and so $S = \emptyset$.
+\end{em}
+\end{lemma}
+\begin{theorem}
+\begin{em}
+(Euclid) There are infinitely many primes.\\
+\emph{Proof.} If not, let $p_1, p_2, \dots , p_k$ be the finite list of all primes, and let $B = p_1p_2\cdots p_k + 1$. Since $B > p_i$ for all $1 \leq i \leq k$, $B$ cannot be prime. Hence $B$ is composite. So by Lemma 4.1 there is a prime $p_j$ where $1 \leq j \leq k$ and $p_j|B$. Since $p_j|p_1p_2\cdots p_k+1$ and $p_j|p_1p_2\cdots p_k$, it follows that $p_j|1$. (Contradiction) This contradiction arises from the assumption that there are only finitely many primes; hence there are infinitely many primes.
+\end{em}
+\end{theorem}
+\begin{theorem}
+The Division Algorithm.
+\begin{em}
+If $a, b \in \mathbb{Z}$ with $b > 0$, then there exist unique $q, r \in \mathbb{Z}$ with $a = qb + r, 0 \leq r < b$.
+\end{em}
+\end{theorem}
+\subsubsection{Representation of Integers in Different Bases}
+Given an integer $n$ written in base 10, to write it in base $b$, we can use the division algorithm. Keep applying the algorithm until the quotient is 0:
+\begin{eqnarray*}
+n &=& q_0b + r_0\\
+q_0 &=& q_1b + r_1\\
+&\cdots&\\
+q_{n-1} &=& 0 \cdot b + r_n\\
+\end{eqnarray*}
+Then, $n = (r_nr_{n_1}\dots r_1r_0)_b$.
+
+One commonly used base is 16, and it is called the \emph{hexadecimal notation}. Because we only have 10 symbols in the standard base-10 system, we use the following 6 additional symbols:
+\begin{center}
+\begin{tabular} {llllll}
+10: &A (Alfa) &11: &B (Bravo) &12: &C (Charlie) \\ 
+13: &D (Delta) &14: &E (Echo) &15: &F (Foxtrot)
+\end{tabular}
+\end{center}
+
+One benefit of using the hexadecimal notation is that it is easy to switch with binary. Breaking a base-2 number into blocks of four bits, then converting each block of four bits to its base-16 representation will result in the hexadecimal notation of the same number. This is because $16=2^4$, and four bits can represent a single digit in hexadecimal. We replace each hexadecimal digit into four bits to go from base-16 to base-2. 
+\subsection{The Greatest Common Divisor: The Euclidean Algorithm}
+\begin{definition}
+\begin{em}
+For $a, b \in \mathbb{Z}$, a positive integer $c$ is said to be a \emph{common divisor of a and b} if $c|a$ and $c|b$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+Let $a, b \in \mathbb{Z}$, where either $a \neq 0$ or $b \neq 0$. Then $c \in \mathbb{Z}^+$ is called a \emph{greatest common divisor} of $a, b$ if
+\begin{enumerate}
+\item $c|a$ and $c|b$
+\item for any common divisor $d$ of $a$ and $b$, we have $d|c$.
+\end{enumerate}
+\end{em}
+\end{definition}
+\begin{theorem}
+\begin{em}
+For $a, b \in \mathbb{Z}^+$, there exists a unique $c \in \mathbb{Z}^+$ that is \emph{the} greatest common divisor of $a, b$.\\
+\emph{Proof.} Given $a, b \in \mathbb{Z}^+$, let $S = \{as + bt | s, t \in \mathbb{Z}, as + bt > 0\}$. Since $S \neq \emptyset$, by the Well-Ordering Principle $S$ has a least element $c$. We claim that $c$ is a greatest common divisor of $a, b$.
+
+Since $c \in S$, $c = ax + by$, for some $x, y \in \mathbb{Z}$. Consequently, if $d \in \mathbb{Z}$ and $d|a$ and $d|b$, $d|(ax+by)$, so $d|c$.
+
+Now we show that $c|a$ and $c|b$. If $c\nmid a$, we can use the division algorithm to write $a = qc + r$, with $q, r \in \mathbb{Z}^+$ and $0 < r < c$. Then $r = a - qc = a - q(ax + by) = (1 - qx)a + (-qy)b$, so $r \in S$, contradicting the choice of $c$ as the least element of $S$. Consequently, $c|a$ and by a similar argument, $c|b$.
+
+Hence, all $a, b \in \mathbb{Z}^+$, the greatest common divisor of $a, b$ exists, and it is unique.
+\end{em}
+\end{theorem}
+\begin{theorem} Euclidean Algorithm.
+\begin{em}
+Let $a, b \in \mathbb{Z}^+$. Set $r_0 = a$ and $r_1 = b$ and apply the division algorithm $n$ times as follows:
+\begin{eqnarray*}
+r_0 &=& q_1r_1 + r_2\\
+r_1 &=& q_2r_2 + r_3\\
+&\cdots&\\
+r_{n-2} &=& q_{n-1}r_{n-1} + r_n\\
+r_{n-1} &=& q_nr_n
+\end{eqnarray*}
+Then, $r_n$, the last nonzero remainder, equals gcd$(a, b)$.\\
+\emph{Proof.} To verify that $r_n =$ gcd$(a, b)$, we establish the two conditions of Definition 4.4.
+
+If $d|a$ and $d|b$ (where $a=r_0$ and $b=r_1$), then since $r_0=q_1r_1 + r_2$, it follows that $d|r_2$. Similarly, $[(d|r_i) \wedge (d|r_{i+1})] \Rightarrow d|r_{i+2}$, so we conclude that $d|r_n$ continuing down the division process. This verifies the second condition.
+
+To verify the first condition, we go in reverse order. From the last equation, $r_n|r_{n-1}$, so $r_n|r_{n-2}$ since $r_{n-2} = q_{n-1}r_{n-1} + r_n$. Similarly, $[(r_n|r_{i+2}) \wedge (r_n|r_{i+1})] \Rightarrow r_n|r_i$, so continuing up through the equations, we get to $r_n|r_1$ and $r_n|r_0$.
+
+Hence, $r_n =$ gcd($a, b$).
+\end{em}
+\end{theorem}
+\begin{theorem}
+\begin{em}
+If $a, b, c \in \mathbb{Z}^+$, the Diophantine equation $ax+by=c$ has an integer solution $x=x_0$, $y=y_0$ if and only if gcd($a, b$) divides $c$.
 \end{em}
 \end{theorem}
 \end{document}
