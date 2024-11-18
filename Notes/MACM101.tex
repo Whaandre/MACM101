@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{circuitikz}
 \usepackage{adjustbox}
+\usepackage{cancel}
 \usepackage[shortlabels]{enumitem}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -457,10 +458,6 @@ The vertical line $|$ is read \emph{such that}, and the symbols $\{x| \dots \}$ 
 \subsubsection{Cardinality}
 \begin{definition} \emph{Let $S$ be a set. If there are exactly $n$ distinct elements in $S$, we say $S$ is a finite set and that $n$ is the cardinality of $n$ denoted by $|S|$.} \end{definition}
 \begin{definition} \emph{A set is infinite if it is not finite.} \end{definition}
-\subsubsection{Cartesian Product}
-\begin{definition} \emph{Let $A$ and $B$ be sets. The cartesian product of $A$ and $B$, denoted by $A\times B$ is the set of all ordered pairs $(a, b)$ where $a \in A$ and $b \in B$.}
-\[A \times B = \{ (a, b) | a \in A \wedge b \in B \}\]
-\end{definition}
 \subsection{Subsets}
 \begin{definition}
 \emph{Set $A$ is said to be a subset of $B$ if and only if every element of $A$ is also an element of $B$. We use $A \subseteq B$ to indicate that $A$ is a subset of $B$. In predicate logic,} 
@@ -559,7 +556,7 @@ For all $a,b,c \in \mathbb{Z}$
 \item $[(a|b) \wedge (b|c)] \Rightarrow a|c$.
 \item $a|b \Rightarrow a|bx$ for all $x \in \mathbb{Z}$.
 \item If $x = y + z$, for some $x, y, z \in \mathbb{Z}$, and $a$ divides two of the three integers $x, y,$ and $z$, then $a$ divides the remaining integer.
-\item $[(a|b) \wedge (a|c)] \Rightarrow a|(bx+cy)\footnote{This is called a \emph{linear combination of} $b, c$.}$ for all $x, y \in \mathbb{Z}$.
+\item $[(a|b) \wedge (a|c)] \Rightarrow a|(bx+cy)$ for all $x, y \in \mathbb{Z}$.\footnote{$bx +cy$ is called a \emph{linear combination of} $b, c$.}
 \item For $1 \leq i \leq n$, let $c_i \in \mathbb{Z}$. If $a$ divides each $c_i$, then $a|(c_1x_1 + c_2x_2 + \cdots + c_nx_n)$, where $x_i \in \mathbb{Z}$ for all $1 \leq i \leq n$.
 \end{enumerate}
 \end{em}
@@ -654,7 +651,124 @@ Hence, $r_n =$ gcd($a, b$).
 \end{theorem}
 \begin{theorem}
 \begin{em}
-If $a, b, c \in \mathbb{Z}^+$, the Diophantine equation $ax+by=c$ has an integer solution $x=x_0$, $y=y_0$ if and only if gcd($a, b$) divides $c$.
+If $a, b, c \in \mathbb{Z}^+$, the Diophantine equation $ax+by=c$ has an integer solution $x=x_0$, $y=y_0$ if and only if gcd($a, b) | c$.
 \end{em}
 \end{theorem}
+\begin{theorem}
+\begin{em}
+For $a,b,c \in \mathbb{Z}^+$, $c$ is called a \emph{common multiple} of $a, b$ if $c$ is a multiple of both $a$ and $b$. Furthermore, $c$ is the \emph{least common multiple} of $a, b$ if it is the smallest of all positive integers that are common multiples of $a, b$. We denote $c$ by lcm($a, b$).
+\end{em}
+\end{theorem}
+\subsection{The Fundamental Theorem of Arithmetic}
+\begin{lemma}
+\begin{em}
+If $a, b \in \mathbb{Z}^+$ and $p$ is prime, then $p|ab \Rightarrow p|a \vee p|b$.
+\end{em}
+\end{lemma}
+\begin{lemma}
+\begin{em}
+Let $a_i \in \mathbb{Z}^+$ for all $1 \leq i \leq n$. If $p$ is prime and $p|a_1a_2 \cdots a_n$, then $p|a_i$ for some $1 \leq i \leq n$.
+\end{em}
+\end{lemma}
+\begin{theorem}
+\begin{em}
+Every integer $n > 1$ can be written as a product of primes uniquely, up to the order of the primes.
+\end{em}
+\end{theorem}
+\section{Relations and Functions}
+\subsection{Functions}
+\begin{definition}
+\begin{em}
+For nonempty sets $A, B$, a \emph{function} $f$ from $A$ to $B$, denoted $f: A \rightarrow B$, is an assignment of exactly one element of $B$ to each element of $A$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+For the function $f: A \rightarrow B$, $A$ is called the \emph{domain} of $f$ and $B$ the \emph{codomain} of $f$. For each ordered pair $(a, b) \in f$, we write $f(a) = b$. $b$ is called the \emph{image} of $a$ under $f$, and $a$ is called the \emph{preimage} of $b$. The subset of $B$ consisting of all $b$ is called the \emph{range} of $f$ and is also denoted by $f(A)$ since it is the set of images under $f$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+Image of $S$ under $f$ with $f: A \rightarrow B$ and $S \subseteq A$ is $f(S) = \{f(s)| s \in S\}$.
+\end{em}
+\end{definition}
+\subsection{Addition and Mulplication of Functions}
+Let $f_1: A \rightarrow R$ and $f_2: A \rightarrow R$ be functions.\\
+Then $f_1+f_2$ and $f_1f_2$ are also functions from $A \rightarrow R$ defined by:
+\[(f_1 + f_2) (x) = f_1(x) + f_2 (x)\]
+\[f_1f_2 (x) = f_1(x) \cdot f_2(x)\]
+\subsection{One-to-one and Onto Functions}
+\begin{definition}
+\begin{em}
+A function $f: A \rightarrow B$ is called \emph{one-to-one} or \emph{injective}, if each element of $B$ appears at most once as the image of an element $A$. That is,
+\[f(x)=f(y) \Rightarrow \forall x \forall y: x = y.\]
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A function is \emph{strictly increasing} if
+\[\forall x \forall y ( x < y \Rightarrow f(x) < f(y)),\]
+and it is \emph{strictly decreasing} if
+\[\forall x \forall y ( x < y \Rightarrow f(x) > f(y)).\]
+If a function is strictly increasing or strictly decreasing, it is injective.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A function $f: A \rightarrow B$ is called \emph{onto} or \emph{surjective}, if $\forall b \in B \; \exists a \in A$ with $f(a) = b$. That is, $f(A) = B$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+If a function is both injective and surjective, it is \emph{bijective}, and \emph{invertible}, meaning its inverse is also a function: \[f^{-1}: B \rightarrow A\]
+\end{em}
+\end{definition}
+\subsection{Composition of Functions}
+Let $f: A \rightarrow B$ and $g: B \rightarrow C$.\\
+The composition of $f$ and $g$ is defined by \[(f \circ g) (a) = f(g(a))\]
+
+For $f: A \rightarrow B$,
+\begin{itemize}
+\item $(f \circ f^{-1}) (b) = f(f^{-1}(b)) = b$
+\item $(f^{-1} \circ f) (a) = f^{-1}(f(a)) = a$
+\item $f^{-1} \circ f = I_A$
+\item $f \circ f^{-1} = I_B$
+\item If $A=B$, then $f \circ f^{-1} = f^{-1} \circ f$
+\end{itemize}
+\subsection{Stirling Numbers of the Second Kind}
+\begin{definition}
+\begin{em}
+\emph{Stirling number of the second kind}, denoted by $S(m, n)$, is the number of ways to distribute $m$ distinct objects into $n$ identical containers with no container left empty, and it is given by
+\[\frac{1}{n!} \sum_{k=0}^n (-1)^k \binom{n}{n-k} (n-k)^m\]
+with $m \geq n$.
+\end{em}
+\end{definition}
+For finite sets $A$ and $B$ with $|A|=m \geq n=|B|$, there are
+\begin{eqnarray*}
+& \displaystyle \binom{n}{n} n^m - \binom{n}{n-1} (n-1)^m + \binom{n}{n-2} (n-2)^m - \cdots + (-1)^{n-1} \binom{n}{1} 1^m\\
+= & \displaystyle \sum^{n-1}_{k=0} (-1)^k \binom{n}{n-k} (n-k)^m\\
+= & \displaystyle \sum^{n}_{k=0} (-1)^k \binom{n}{n-k} (n-k)^m\\
+= & n! \cdot S(m, n)
+\end{eqnarray*}
+onto functions from $A$ to $B$.
+\subsection{The Pigeonhole Principle}
+\begin{definition}
+\begin{em}
+\emph{The Pigeonhole Principle.} If $m$ pigeons occupy $n$ pigeonholes and $m > n$, then at least one pigeonhole has two or more pigeons roosting in it.
+\end{em}
+\end{definition}
+\subsection{Relations}
+\begin{definition} \emph{Let $A$ and $B$ be sets. The cartesian product of $A$ and $B$, denoted by $A\times B$ is the set of all ordered pairs $(a, b)$ where $a \in A$ and $b \in B$.}
+\[A \times B = \{ (a, b) | a \in A \wedge b \in B \}\]
+\end{definition}
+A relation can be defined as a subset of the cartesian product of 2 sets.
+\begin{definition}
+\begin{em}
+A binary relation $R \subseteq A \times B$ is called a relation on $A \times B$. For any $(a, b) \in A \times B$, we write
+\[a \; R \; b \text{ or } (a, b) \in R\]
+if $a$ is in relation $R$ to $b$ and
+\[a \; \cancel{R} \; b \text{ or } (a, b) \notin R\]
+else.
+\end{em}
+\end{definition}
 \end{document}
