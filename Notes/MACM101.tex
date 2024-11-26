@@ -771,4 +771,68 @@ if $a$ is in relation $R$ to $b$ and
 else.
 \end{em}
 \end{definition}
+\begin{definition}
+\begin{em}
+A relation $R$ on a set $A$ is called \emph{reflexive} if for all $x \in A, (x, x) \in R$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A relation $R$ on a set $A$ is called \emph{irreflexive} if for all $x \in A, (x, x) \notin R$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A relation $R \subseteq A \times A$ is called \emph{symmetric} if $(x, y) \in R \Rightarrow (y, x) \in R$ for all $(x, y) \in A \times A$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A relation $R \subseteq A \times A$ is called \emph{anti-symmetric} if $(x, y) \in R \wedge (y, x) \in R \Rightarrow x = y$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+A relation $R \in A \times A$ is called \emph{transitive} if $(x, y) \in R \wedge (y, z) \in R \Rightarrow (x, z) \in R$ for all $x, y, z \in A$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+An \emph{equivalence relation} $R$ on a set $A$ is a relation that is reflexive, symmetric, and transitive.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+An \emph{equivalence class} of $a$ under an equivalence relation $R$, denoted $[a]$ is defined as:
+\[[a] = \{b \in X \; | \; a R b\}\]
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+If $A, B, C$ are sets with $R_1 \in A \times B$ and $R_2 \in B \times C$, then the \emph{composite relation} $R_1 \circ R_2$ is a relation from $A$ to $C$ defined by $R_1 \circ R_2 = \{(x, z)|\exists y \in B \text{ with } (x, y) \in R_1 \wedge (y, z) \in R_2\}$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+Let $A_1, A_2, \dots A_n$ be sets. An $n$-ary relation on these sets is a subset of $A_1 \times A_2 \times \cdots \times A_n$. The sets $A_1, A_2, \dots A_n$ are called the domains of the relation and $n$ is its degree.
+\end{em}
+\end{definition}
+\subsection{Representing Relations}
+\begin{itemize}
+\item
+Matrices\\
+\[m_{ij} = \begin{cases} 1& \text{if } (a_i, b_j) \in R\\0& \text{else}\end{cases}\]
+\item Directed Graphs
+\end{itemize}
+\subsection{Projection and Join Operation}
+\begin{definition}
+\begin{em}
+The \emph{projection} $P_{i_1, i_2, \dots, i_m}$ maps the $n$-tuple $(a_1, a_2, \dots, a_n)$ to the $m$-tuple $(a_{i_1}, a_{i_2}, \dots a_{i_m})$ where $m \leq n$.
+\end{em}
+\end{definition}
+\begin{definition}
+\begin{em}
+The \emph{join} $J_p (R_1, R_2)$ where $p \leq m, n$, is a relation of degree $m+n-p$ that consists of all $(m+n-p)$-tuples that combines $m$-tuple in $R_1$ and $n$-tuple in $R_2$ with overlapping $p$ elements.
+\end{em}
+\end{definition}
 \end{document}
